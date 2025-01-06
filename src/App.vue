@@ -4,9 +4,12 @@ import { RouterView } from 'vue-router'
 import { useTheme, type ThemeInstance } from 'vuetify';
 import { COLOR_THEMES } from './constants/themes.constants';
 import { NAV_BAR_ITEMS } from './constants/navigationBarItems.constants';
+import { useI18n } from 'vue-i18n';
+import { LOCALES } from './constants/locales.constants';
 
 const isSidebarOpen = ref(false);
 const theme: ThemeInstance = useTheme();
+const { locale } = useI18n();
 const navBarItems = NAV_BAR_ITEMS;
 
 function toggleSideBar(): void {
@@ -20,6 +23,10 @@ function toggleTheme(): void {
       : COLOR_THEMES.DARK;
 }
 
+function toggleLocale(): void {
+  locale.value = locale.value === LOCALES.EN ? LOCALES.RU : LOCALES.EN;
+}
+
 </script>
 
 <template>
@@ -31,9 +38,12 @@ function toggleTheme(): void {
     <v-navigation-drawer v-model="isSidebarOpen">
       <v-list-item title="Navigation bar" subtitle="Recipe book"></v-list-item>
       <v-divider></v-divider>
-      <v-list-item v-for="item in navBarItems" :key="item" :title=item.title @click="$router.push({ path: item.routerPath })"></v-list-item>
-      <div class="app-change-theme-container" >
+      <v-list-item v-for="item in navBarItems" :key="item" :title=item.title
+        @click="$router.push({ path: item.routerPath })"></v-list-item>
+      <div class="app-change-theme-container">
         <v-btn @click="toggleTheme">Change theme</v-btn>
+        <v-btn @click="toggleLocale">Change locale</v-btn>
+        <h1>{{ $t('message.hello') }}</h1>
       </div>
     </v-navigation-drawer>
     <v-main>
@@ -44,7 +54,10 @@ function toggleTheme(): void {
 
 <style scoped>
 .app-change-theme-container {
-  width: 100%; display: flex; justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin-top: 2rem;
 }
 </style>
