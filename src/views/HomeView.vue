@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
 import {inject, onMounted, ref, type Ref} from 'vue'
 import { dishModelServiceToken } from '@/DITokens/tokens';
 import type { DishModel, DishModelService } from '@/model/dish/dishModel.typings.ts';
@@ -9,15 +8,12 @@ const dishModelService: DishModelService = inject(dishModelServiceToken) as Dish
 
 const dishes: Ref<DishModel[]> = ref([]);
 
-onMounted(() => {
-  dishModelService.getDishes().then(_dishes => dishes.value = _dishes );
-})
+onMounted(() => dishModelService.getDishes().then(_dishes => dishes.value = _dishes ))
 
 </script>
 
 <template>
   <main>
-    <TheWelcome />
     <DishesGallery :dishes="dishes"/>
   </main>
 </template>

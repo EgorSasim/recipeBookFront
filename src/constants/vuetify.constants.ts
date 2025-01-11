@@ -11,6 +11,9 @@ export function getVuetify() {
           defaultTheme: COLOR_THEMES.DARK,
           themes: THEMES_COLORS_PROPS,
         },
+        icons: {
+          defaultSet: "mdi",
+        }
       });
 }
 

@@ -10,7 +10,7 @@ import { LOCALES } from './constants/locales.constants';
 const isSidebarOpen = ref(false);
 const theme: ThemeInstance = useTheme();
 const { locale } = useI18n();
-const navBarItems = NAV_BAR_ITEMS;
+const navBarItems = NAV_BAR_ITEMS.map(item => ({...item, title: 'message.'+item.title }));
 
 function toggleSideBar(): void {
   isSidebarOpen.value = !isSidebarOpen.value;
@@ -38,12 +38,11 @@ function toggleLocale(): void {
     <v-navigation-drawer v-model="isSidebarOpen">
       <v-list-item title="Navigation bar" subtitle="Recipe book"></v-list-item>
       <v-divider></v-divider>
-      <v-list-item v-for="item in navBarItems" :key="item" :title=item.title
+      <v-list-item v-for="item in navBarItems" :key="item" :title=$t(item.title)
         @click="$router.push({ path: item.routerPath })"></v-list-item>
       <div class="app-change-theme-container">
-        <v-btn @click="toggleTheme">Change theme</v-btn>
-        <v-btn @click="toggleLocale">Change locale</v-btn>
-        <h1>{{ $t('message.hello') }}</h1>
+        <v-btn @click="toggleTheme">{{ $t('message.changeTheme') }}</v-btn>
+        <v-btn @click="toggleLocale">{{ $t('message.changeLocale') }}</v-btn>
       </div>
     </v-navigation-drawer>
     <v-main>

@@ -5,11 +5,11 @@ interface NavBarItem {
 }
 
 enum NavBarItemsNames {
-    HOME = 'Home',
-    MY_RECIPES = "My Recipes",
-    WORLD_KITCHEN = "World kitchen", 
-    INJESTION = "Injestion",
-    SETTINGS = "Settings"
+    HOME = "home",
+    MY_RECIPES = "myRecipes",
+    WORLD_KITCHEN = "worldKitchen", 
+    INJESTION = "injestion",
+    SETTINGS = "settings"
 }
 
 export const NAV_BAR_ITEMS: NavBarItem[] = [
